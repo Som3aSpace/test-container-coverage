@@ -3,11 +3,8 @@ spring:
     init:
       mode: never
   datasource:
-    url: jdbc:sqlserver://localhost:1433;databaseName=test_container;encrypt=true;trustServerCertificate=true;
-    username: db_admin_dtc
-    password: oGPh19vOqu2aaiNeJaXq
+    url: jdbc:sqlserver://localhost:1433;databaseName=test_container;encrypt=true;trustServerCertificate=true;username=db_admin_dtc;password=oGPh19vOqu2aaiNeJaXq;
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-#    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
@@ -20,5 +17,4 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.SQLServer2012Dialect
-#        dialect: org.hibernate.dialect.MySQLDialect
         format_sql : true
