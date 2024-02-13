@@ -22,7 +22,6 @@ public class CourseService {
 
     public List<Course> getAllAvailableCourses() {
         log.info("CourseService::getAllAvailableCourses method executed");
-        log.info("CourseService::getAllAvailableCourses method executed2");
         return courseRepository.findAll();
     }
 //
