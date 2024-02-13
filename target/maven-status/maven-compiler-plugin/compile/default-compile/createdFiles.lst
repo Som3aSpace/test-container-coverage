@@ -1,6 +1,0 @@
-com\javatechie\controller\CourseController.class
-com\javatechie\entity\Course$CourseBuilder.class
-com\javatechie\repository\CourseRepository.class
-com\javatechie\service\CourseService.class
-com\javatechie\CourseServiceApplication.class
-com\javatechie\entity\Course.class
