@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javatechie.controller.CourseController;
 import com.javatechie.entity.Course;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -18,7 +17,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.testcontainers.containers.MySQLContainer;
+import org.testcontainers.containers.MSSQLServerContainer;
+import org.testcontainers.junit.jupiter.Container;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -29,24 +29,29 @@ class CourseServiceApplicationTests {
     @Autowired
     private MockMvc mockMvc;
 
-    static MySQLContainer mySQLContainer = new MySQLContainer("mysql:latest");
-
+    @Container
+    private static final MSSQLServerContainer<?> SQLSERVER_CONTAINER = new MSSQLServerContainer<>(
+            "mcr.microsoft.com/mssql/server:2022-latest").acceptLicense();
 
     @DynamicPropertySource
-    static void configureProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.datasource.url", mySQLContainer::getJdbcUrl);
-        registry.add("spring.datasource.username", mySQLContainer::getUsername);
-        registry.add("spring.datasource.password", mySQLContainer::getPassword);
+    static void setProperties(DynamicPropertyRegistry dynamicPropertyRegistry) {
+        dynamicPropertyRegistry.add("spring.datasource.url", SQLSERVER_CONTAINER::getJdbcUrl);
+        dynamicPropertyRegistry.add("spring.datasource.username", SQLSERVER_CONTAINER::getUsername);
+        dynamicPropertyRegistry.add("spring.datasource.password", SQLSERVER_CONTAINER::getPassword);
     }
 
     @BeforeAll
     static void beforeAll() {
-        mySQLContainer.start();
+        SQLSERVER_CONTAINER.start();
     }
+
+//    static {
+//        SQLSERVER_CONTAINER.start();
+//    }
 
     @AfterAll
     static void afterAll() {
-        mySQLContainer.stop();
+        SQLSERVER_CONTAINER.stop();
     }
 
     @Before
