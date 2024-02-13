@@ -24,4 +24,10 @@ public class CourseService {
         log.info("CourseService::getAllAvailableCourses method executed");
         return courseRepository.findAll();
     }
+
+    public void notTested() {
+        log.info("method is not testing");
+        log.info("method is not testing");
+    }
+
 }
