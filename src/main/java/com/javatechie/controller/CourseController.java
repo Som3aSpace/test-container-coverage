@@ -25,6 +25,7 @@ public class CourseController {
     @GetMapping
     public List<Course> viewAllCourses() {
         log.info("CourseController::viewAllCourses method executed");
+        log.info("CourseController::viewAllCourses method executed");
         return courseService.getAllAvailableCourses();
     }
 }
